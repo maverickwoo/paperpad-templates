@@ -1,0 +1,53 @@
+% !TeX root = ./square.tex
+\documentclass[UTF8]{ctexart}
+
+% Adjust paper and printer parameters in the following file
+\input{paper-printer}
+
+% Name the grid
+\def\gridname{square grid (正方格)}
+
+% Declare stamp dimensions and separations
+\def\stampheight{13mm}\def\stampvsep{0mm}
+\def\stampwidth {13mm}\def\stamphsep{0mm}
+
+% Declare a tikz pic for stamping onto the grid
+\providecolor{stampcolora}{cmyk:named}{magenta!30}
+\tikzset{
+  stamp majorline/.style = {
+      stampcolora,
+      line cap=rect,
+      line width=0.3mm
+    },
+  pics/stamp/.style={
+      code={
+          % Horizontal
+          \draw [stamp majorline] (0,           0) -- (\stampwidth,           0);
+          \draw [stamp majorline] (0,\stampheight) -- (\stampwidth,\stampheight);
+          % Vertical
+          \draw [stamp majorline] (          0,0) -- (          0,\stampheight);
+          \draw [stamp majorline] (\stampwidth,0) -- (\stampwidth,\stampheight);
+        }
+    }
+}
+
+% Compute the number of stamps that can fit in printable area
+\pgfmathsetmacro{\nx}{int((\textwidth +\stamphsep)/(\stampwidth +\stamphsep))}
+\pgfmathsetmacro{\ny}{int((\textheight+\stampvsep)/(\stampheight+\stampvsep))}
+
+% Set PDF properties
+\extractcolorspec{stampcolora}{\stampcolora}
+\def\pdftitle{\ny*\nx{} \gridname{} of \stampheight-by-\stampwidth{} squares}
+\hypersetup{
+  pdftitle=\pdftitle,
+  pdfkeywords={%
+      \ny*\nx{} \gridname,
+      h,s: \stampheight{} | \stampvsep,
+      w,s: \stampwidth{} | \stamphsep,
+      c: \{\stampcolora\}
+    },
+  pdfsubject={https://github.com/maverickwoo/paperpad-templates},
+  pdfauthor={Maverick Woo}
+}
+
+\input{body}
