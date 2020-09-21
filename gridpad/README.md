@@ -44,7 +44,12 @@ to preserve this page.)
    [letter](https://www.overleaf.com/docs?engine=xelatex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/nine-square.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/paper-printer.tex))
    on Overleaf
 
-5. Open Square Grid (正方格)
+5. Open Rice-Square Grid (米字格)
+   ([a4](https://www.overleaf.com/docs?engine=xelatex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/rice-square.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/paper-printer-a4.tex&snip_name[]=body.tex&snip_name[]=rice-square.tex&snip_name[]=paper-printer.tex),
+   [letter](https://www.overleaf.com/docs?engine=xelatex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/rice-square.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/paper-printer.tex))
+   on Overleaf
+
+6. Open Square Grid (正方格)
    ([a4](https://www.overleaf.com/docs?engine=xelatex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/square.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/paper-printer-a4.tex&snip_name[]=body.tex&snip_name[]=square.tex&snip_name[]=paper-printer.tex),
    [letter](https://www.overleaf.com/docs?engine=xelatex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/square.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/paper-printer.tex))
    on Overleaf
