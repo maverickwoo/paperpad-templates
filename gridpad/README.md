@@ -17,11 +17,13 @@ If you do not have LaTeX on your computer, you can use
 [Overleaf.com](https://overleaf.com) to generate your own template PDFs. Click
 on one of the following links and you will be presented with a new document on
 Overleaf.com. You can then use your browser to edit the source code of the
-template. Once you are happy with the result, you can also [download your own
-PDF](https://www.overleaf.com/learn/how-to/Exporting_your_work_from_Overleaf).
+template. Once you are happy with the result, you can also download your own
+PDF by following [these instructions](https://www.overleaf.com/learn/how-to/Exporting_your_work_from_Overleaf).
 
-1. [Cross Pad](https://www.overleaf.com/docs?snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/.latexmkrc&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/crosspad.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/paper-printer.tex)
+1. Open [Cross
+   Pad](https://www.overleaf.com/docs?snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/.latexmkrc&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/crosspad.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/paper-printer.tex)
+   on Overleaf
 
-2. [Dot Pad]()
+2. Open [Dot Pad](https://www.overleaf.com/docs?snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/.latexmkrc&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/dotpad.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/paper-printer.tex) on Overleaf
 
-3. [Nine-Squared (九宫格)]()
+3. Open [Nine-Squared (九宫格)](https://www.overleaf.com/docs?snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/.latexmkrc&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/nine-squared.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/paper-printer.tex) on Overleaf
