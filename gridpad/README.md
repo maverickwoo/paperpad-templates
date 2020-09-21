@@ -20,7 +20,7 @@ Overleaf.com. You can then use your browser to edit the source code of the
 template. Once you are happy with the result, you can also [download your own
 PDF](https://www.overleaf.com/learn/how-to/Exporting_your_work_from_Overleaf).
 
-1. [Cross Pad]()
+1. [Cross Pad](https://www.overleaf.com/docs?snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/.latexmkrc&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/crosspad.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/paper-printer.tex)
 
 2. [Dot Pad]()
 
