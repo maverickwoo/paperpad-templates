@@ -1,0 +1,50 @@
+% !TeX root = ./crosspad.tex
+
+\input{paper-printer}
+
+% Name the grid
+\def\gridname{cross pad}
+
+% Declare stamp dimensions and separations
+\def\stampheight{0mm}\def\stampvsep{5mm}
+\def\stampwidth {0mm}\def\stamphsep{5mm}
+
+% Declare a tikz pic for stamping onto the grid
+\providecolor{stampcolor}{cmyk:named}{black!40}
+\def\crossradius{0.4mm}
+\def\crosslinewidth{0.1mm}
+\tikzset{
+  stamp line/.style={
+      stampcolor,
+      line cap=rect,
+      line width=\crosslinewidth
+    },
+  pics/stamp/.style={
+      code={
+          \draw [stamp line] (-\crossradius,0) -- (\crossradius,0); % -
+          \draw [stamp line] (0,-\crossradius) -- (0,\crossradius); % |
+        }
+    }
+}
+
+% Compute the number of stamps that can fit in printable area
+\pgfmathsetmacro{\nx}{int((\textwidth +\stamphsep)/(\stampwidth +\stamphsep))}
+\pgfmathsetmacro{\ny}{int((\textheight+\stampvsep)/(\stampheight+\stampvsep))}
+
+% Set PDF properties
+\extractcolorspec{stampcolor}{\stampcolor}
+\def\pdftitle{\ny*\nx{} \gridname{} with \stampvsep-by-\stamphsep{} spaces}
+\hypersetup{
+  pdftitle=\pdftitle,
+  pdfkeywords={%
+      \ny*\nx{} \gridname,
+      h,s: \stampheight{} | \stampvsep,
+      w,s: \stampwidth{} | \stamphsep,
+      r,t: \crossradius{} | \crosslinewidth,
+      c: \{\stampcolor\}
+    },
+  pdfsubject={https://github.com/maverickwoo/paperpad-templates},
+  pdfauthor={Maverick Woo}
+}
+
+\input{body}

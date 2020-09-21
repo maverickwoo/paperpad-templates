@@ -1,0 +1,48 @@
+% !TeX root = ./dotpad.tex
+
+\input{paper-printer}
+
+% Name the grid
+\def\gridname{dot pad}
+
+% Declare stamp dimensions and separations
+\def\stampheight{0mm}\def\stampvsep{5mm}
+\def\stampwidth {0mm}\def\stamphsep{5mm}
+
+% Declare a tikz pic for stamping onto the grid
+\providecolor{stampcolor}{cmyk:named}{black!40}
+\def\dotradius{0.2mm}
+\tikzset{
+  pics/stamp/.style={
+      code={
+          \fill circle (\dotradius)
+          [
+              color=stampcolor,
+              inner sep=0mm,
+              outer sep=0mm
+            ];
+        }
+    }
+}
+
+% Compute the number of stamps that can fit in printable area
+\pgfmathsetmacro{\nx}{int((\textwidth +\stamphsep)/(\stampwidth +\stamphsep))}
+\pgfmathsetmacro{\ny}{int((\textheight+\stampvsep)/(\stampheight+\stampvsep))}
+
+% Set PDF properties
+\extractcolorspec{stampcolor}{\stampcolor}
+\def\pdftitle{\ny*\nx{} \gridname{} with \stampvsep-by-\stamphsep{} spaces}
+\hypersetup{
+  pdftitle=\pdftitle,
+  pdfkeywords={%
+      \ny*\nx{} \gridname,
+      h,s: \stampheight{} | \stampvsep,
+      w,s: \stampwidth{} | \stamphsep,
+      r: \dotradius,
+      c: \{\stampcolor\}
+    },
+  pdfsubject={https://github.com/maverickwoo/paperpad-templates},
+  pdfauthor={Maverick Woo}
+}
+
+\input{body}

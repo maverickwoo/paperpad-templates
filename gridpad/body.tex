@@ -1,0 +1,31 @@
+% This file is not intended to contain any user-adjustable parameters.
+
+\begin{document}
+
+\begin{tikzpicture}[remember picture,overlay]
+
+  % Add watermark
+  \node [font=\ttfamily,color=black!1]
+  at ($(current page text area.south) + (0mm,1ex)$) {
+    \href{https://github.com/maverickwoo/paperpad-templates}{\pdftitle}
+  };
+
+  % Compute origin coordinate
+  \pgfmathsetlengthmacro{\totalwidth}{\nx*\stampwidth+(\nx-1)*\stamphsep}
+  \pgfmathsetlengthmacro{\marginx}{(\paperwidth-\totalwidth)/2}
+  \pgfmathsetlengthmacro{\totalheight}{\ny*\stampheight+(\ny-1)*\stampvsep}
+  \pgfmathsetlengthmacro{\marginy}{(\paperheight-\totalheight)/2}
+  \coordinate (origin) at ($(current page.south west) + (\marginx,\marginy)$);
+
+  % Put stamps onto the grid
+  \foreach \ix in {1,...,\nx}
+  \foreach \iy in {1,...,\ny}
+    {
+      \pgfmathsetlengthmacro{\deltax}{(\ix-1)*(\stampwidth +\stamphsep)}
+      \pgfmathsetlengthmacro{\deltay}{(\iy-1)*(\stampheight+\stampvsep)}
+      \draw ($(origin) + (\deltax,\deltay)$) pic {stamp};
+    }
+
+\end{tikzpicture}
+
+\end{document}

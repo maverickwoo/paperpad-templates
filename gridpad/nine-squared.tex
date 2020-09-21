@@ -1,0 +1,66 @@
+% !TeX root = ./nine-squared.tex
+
+\input{paper-printer}
+
+% Name the grid
+\def\gridname{nine-squared grid (九宫格)}
+
+% Declare stamp dimensions and separations
+\def\stampheight{15mm}\def\stampvsep{0mm}
+\def\stampwidth {15mm}\def\stamphsep{0mm}
+
+% Declare a tikz pic for stamping onto the grid
+\providecolor{stampcolora}{cmyk:named}{magenta!30}
+\providecolor{stampcolorb}{cmyk:named}{cyan!30}
+\tikzset{
+  stamp majorline/.style = {
+      stampcolora,
+      line cap=rect,
+      line width=0.3mm
+    },
+  stamp minorline/.style = {
+      stampcolorb,
+      line cap=round,
+      line width=0.15mm,
+      dash pattern=on 0.5mm off 0.5mm,
+      dash phase=0.25mm
+    },
+  pics/stamp/.style={
+      code={
+          % Horizontal
+          \draw [stamp minorline] (0,  \stampheight/3) -- (\stampwidth,  \stampheight/3);
+          \draw [stamp minorline] (0,2*\stampheight/3) -- (\stampwidth,2*\stampheight/3);
+          % Vertical
+          \draw [stamp minorline] (  \stampwidth/3,0) -- (  \stampwidth/3,\stampheight);
+          \draw [stamp minorline] (2*\stampwidth/3,0) -- (2*\stampwidth/3,\stampheight);
+          % Horizontal
+          \draw [stamp majorline] (0,             0  ) -- (\stampwidth,             0  );
+          \draw [stamp majorline] (0,  \stampheight  ) -- (\stampwidth,  \stampheight  );
+          % Vertical
+          \draw [stamp majorline] (            0  ,0) -- (            0  ,\stampheight);
+          \draw [stamp majorline] (  \stampwidth  ,0) -- (  \stampwidth  ,\stampheight);
+        }
+    }
+}
+
+% Compute the number of stamps that can fit in printable area
+\pgfmathsetmacro{\nx}{int((\textwidth +\stamphsep)/(\stampwidth +\stamphsep))}
+\pgfmathsetmacro{\ny}{int((\textheight+\stampvsep)/(\stampheight+\stampvsep))}
+
+% Set PDF properties
+\extractcolorspec{stampcolora}{\stampcolora}
+\extractcolorspec{stampcolorb}{\stampcolorb}
+\def\pdftitle{\ny*\nx{} \gridname{} of \stampheight-by-\stampwidth{} squares}
+\hypersetup{
+  pdftitle=\pdftitle,
+  pdfkeywords={%
+      \ny*\nx{} \gridname,
+      h,s: \stampheight{} | \stampvsep,
+      w,s: \stampwidth{} | \stamphsep,
+      c: \{\stampcolora; \stampcolorb\}
+    },
+  pdfsubject={https://github.com/maverickwoo/paperpad-templates},
+  pdfauthor={Maverick Woo}
+}
+
+\input{body}
