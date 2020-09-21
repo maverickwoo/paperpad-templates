@@ -25,14 +25,14 @@
       line cap=butt,
       line width=0.15mm,
       dash pattern=on \stampwidth/3/2/2 off \stampwidth/3/2/2,
-      dash phase=0.5*\stampwidth/3/2/2 %1.5 also looks good
+      dash phase=0.5*\stampwidth/3/2/2 % alternative: 1.5
     },
   stamp minorlinev/.style = {
       stampcolorb,
       line cap=butt,
       line width=0.15mm,
       dash pattern=on \stampheight/3/2/2 off \stampheight/3/2/2,
-      dash phase=0.5*\stampheight/3/2/2 %1.5 also looks good
+      dash phase=0.5*\stampheight/3/2/2 % alternative: 1.5
     },
   pics/stamp/.style={
       code={
@@ -41,11 +41,11 @@
           % Vertical
           \draw [stamp minorlinev] (\stampwidth/2,0) -- (\stampwidth/2,\stampheight);
           % Horizontal
-          \draw [stamp majorline] (0,           0  ) -- (\stampwidth,             0);
-          \draw [stamp majorline] (0,\stampheight  ) -- (\stampwidth,\stampheight  );
+          \draw [stamp majorline ] (0,           0  ) -- (\stampwidth,           0  );
+          \draw [stamp majorline ] (0,\stampheight  ) -- (\stampwidth,\stampheight  );
           % Vertical
-          \draw [stamp majorline] (          0  ,0) -- (          0  ,\stampheight);
-          \draw [stamp majorline] (\stampwidth  ,0) -- (\stampwidth  ,\stampheight);
+          \draw [stamp majorline ] (          0  ,0) -- (          0  ,\stampheight);
+          \draw [stamp majorline ] (\stampwidth  ,0) -- (\stampwidth  ,\stampheight);
         }
     }
 }

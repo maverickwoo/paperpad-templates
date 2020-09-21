@@ -26,21 +26,21 @@
       line cap=butt,
       line width=0.15mm,
       dash pattern=on \stampwidth/3/2/2 off \stampwidth/3/2/2,
-      dash phase=0.5*\stampwidth/3/2/2 %1.5 also looks good
+      dash phase=0.5*\stampwidth/3/2/2 % alternative: 1.5
     },
   stamp minorlinev/.style = {
       stampcolorb,
       line cap=butt,
       line width=0.15mm,
       dash pattern=on \stampheight/3/2/2 off \stampheight/3/2/2,
-      dash phase=0.5*\stampheight/3/2/2 %1.5 also looks good
+      dash phase=0.5*\stampheight/3/2/2 % alternative: 1.5
     },
   stamp minorlined/.style = {
       stampcolorb,
       line cap=butt,
       line width=0.15mm,
       dash pattern=on \stampdiagonal/4/2/2 off \stampdiagonal/4/2/2,
-      dash phase=1.5*\stampdiagonal/4/2/2 %0.5 also looks good
+      dash phase=1.5*\stampdiagonal/4/2/2 % alternative: 0.5
     },
   pics/stamp/.style={
       code={
@@ -48,16 +48,15 @@
           \draw [stamp minorlineh] (0,\stampheight/2) -- (\stampwidth,\stampheight/2);
           % Vertical
           \draw [stamp minorlinev] (\stampwidth/2,0) -- (\stampwidth/2,\stampheight);
-
-          \draw[stamp minorlined] (0,0) -- (\stampwidth,\stampheight);
-          \draw[stamp minorlined] (0,\stampheight) -- (\stampwidth,0);
-
+          % Diagonal
+          \draw [stamp minorlined] (0,0) -- (\stampwidth,\stampheight);
+          \draw [stamp minorlined] (0,\stampheight) -- (\stampwidth,0);
           % Horizontal
-          \draw [stamp majorline] (0,           0  ) -- (\stampwidth,             0);
-          \draw [stamp majorline] (0,\stampheight  ) -- (\stampwidth,\stampheight  );
+          \draw [stamp majorline ] (0,           0  ) -- (\stampwidth,           0  );
+          \draw [stamp majorline ] (0,\stampheight  ) -- (\stampwidth,\stampheight  );
           % Vertical
-          \draw [stamp majorline] (          0  ,0) -- (          0  ,\stampheight);
-          \draw [stamp majorline] (\stampwidth  ,0) -- (\stampwidth  ,\stampheight);
+          \draw [stamp majorline ] (          0  ,0) -- (          0  ,\stampheight);
+          \draw [stamp majorline ] (\stampwidth  ,0) -- (\stampwidth  ,\stampheight);
         }
     }
 }
