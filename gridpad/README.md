@@ -25,13 +25,13 @@ Overleaf.com](https://www.overleaf.com/learn/how-to/Exporting_your_work_from_Ove
 to preserve this page.)
 
 1. Open [Cross
-   Pad](https://www.overleaf.com/docs?snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/.latexmkrc&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/crosspad.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/paper-printer.tex)
+   Pad](https://www.overleaf.com/docs?engine=xelatex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/crosspad.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/paper-printer.tex)
    on Overleaf
 
 2. Open [Dot
-   Pad](https://www.overleaf.com/docs?snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/.latexmkrc&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/dotpad.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/paper-printer.tex)
+   Pad](https://www.overleaf.com/docs?engine=xelatex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/dotpad.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/paper-printer.tex)
    on Overleaf
 
 3. Open [Nine-Squared
-   (九宫格)](https://www.overleaf.com/docs?snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/.latexmkrc&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/nine-squared.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/paper-printer.tex)
+   (九宫格)](https://www.overleaf.com/docs?engine=xelatex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/nine-squared.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/gridpad/paper-printer.tex)
    on Overleaf
