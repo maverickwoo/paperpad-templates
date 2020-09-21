@@ -1,11 +1,11 @@
-% !TeX root = ./nine-square.tex
+% !TeX root = ./four-square.tex
 \documentclass[UTF8]{ctexart}
 
 % Adjust paper and printer parameters in the following file
 \input{paper-printer}
 
 % Name the grid
-\def\gridname{nine-square grid (九宫格)}
+\def\gridname{four-square grid (田字格)}
 
 % Declare stamp dimensions and separations
 \def\stampheight{13mm}\def\stampvsep{0mm}
@@ -14,7 +14,6 @@
 % Declare a tikz pic for stamping onto the grid
 \providecolor{stampcolora}{cmyk:named}{magenta!30}
 \providecolor{stampcolorb}{cmyk:named}{cyan!30}
-% todo: minor dashed lines need v and h due to pattern
 \tikzset{
   stamp majorline/.style = {
       stampcolora,
@@ -25,30 +24,28 @@
       stampcolorb,
       line cap=butt,
       line width=0.15mm,
-      dash pattern=on \stampwidth/3/3/2 off \stampwidth/3/3/2,
-      dash phase=0.5*\stampwidth/3/3/2 %1.5 also looks good
+      dash pattern=on \stampwidth/3/2/2 off \stampwidth/3/2/2,
+      dash phase=0.5*\stampwidth/3/2/2 %1.5 also looks good
     },
   stamp minorlinev/.style = {
       stampcolorb,
       line cap=butt,
       line width=0.15mm,
-      dash pattern=on \stampheight/3/3/2 off \stampheight/3/3/2,
-      dash phase=0.5*\stampheight/3/3/2 %1.5 also looks good
+      dash pattern=on \stampheight/3/2/2 off \stampheight/3/2/2,
+      dash phase=0.5*\stampheight/3/2/2 %1.5 also looks good
     },
   pics/stamp/.style={
       code={
           % Horizontal
-          \draw [stamp minorlineh] (0,  \stampheight/3) -- (\stampwidth,  \stampheight/3);
-          \draw [stamp minorlineh] (0,2*\stampheight/3) -- (\stampwidth,2*\stampheight/3);
+          \draw [stamp minorlineh] (0,\stampheight/2) -- (\stampwidth,\stampheight/2);
           % Vertical
-          \draw [stamp minorlinev] (  \stampwidth/3,0) -- (  \stampwidth/3,\stampheight);
-          \draw [stamp minorlinev] (2*\stampwidth/3,0) -- (2*\stampwidth/3,\stampheight);
+          \draw [stamp minorlinev] (\stampwidth/2,0) -- (\stampwidth/2,\stampheight);
           % Horizontal
-          \draw [stamp majorline ] (0,             0  ) -- (\stampwidth,             0  );
-          \draw [stamp majorline ] (0,  \stampheight  ) -- (\stampwidth,  \stampheight  );
+          \draw [stamp majorline] (0,           0  ) -- (\stampwidth,             0);
+          \draw [stamp majorline] (0,\stampheight  ) -- (\stampwidth,\stampheight  );
           % Vertical
-          \draw [stamp majorline ] (            0  ,0) -- (            0  ,\stampheight);
-          \draw [stamp majorline ] (  \stampwidth  ,0) -- (  \stampwidth  ,\stampheight);
+          \draw [stamp majorline] (          0  ,0) -- (          0  ,\stampheight);
+          \draw [stamp majorline] (\stampwidth  ,0) -- (\stampwidth  ,\stampheight);
         }
     }
 }
