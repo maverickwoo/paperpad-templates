@@ -12,9 +12,12 @@
 \def\stampwidth {13mm}\def\stamphsep{0mm}
 
 % Declare a tikz pic for stamping onto the grid
-\providecolor{stampcolora}{cmyk:named}{magenta!66!yellow}
-\providecolor{stampcolorb}{cmyk:named}{cyan!66!yellow}
+\providecolor{stampcolora}{cmyk:named}{magenta!66!yellow!50}
+\providecolor{stampcolorb}{cmyk:named}{cyan!66!yellow!60}
 \pgfmathsetlengthmacro{\stampdiagonal}{sqrt(\stampheight*\stampheight+\stampwidth*\stampwidth)}
+\pgfmathsetlengthmacro{\stamphdash}{\stampwidth/3/2/2}
+\pgfmathsetlengthmacro{\stampvdash}{\stampheight/3/2/2}
+\pgfmathsetlengthmacro{\stampddash}{\stampdiagonal/5/2/2}
 \tikzset{
   stamp majorline/.style = {
       stampcolora,
@@ -25,32 +28,34 @@
       stampcolorb,
       line cap=butt,
       line width=0.15mm,
-      dash pattern=on \stampwidth/3/2/2 off \stampwidth/3/2/2,
-      dash phase=0.5*\stampwidth/3/2/2 % alternative: 1.5
+      dash pattern=on \stamphdash off \stamphdash,
+      dash phase=0.5*\stamphdash % on-center: 0.5; off-center: 1.5
     },
   stamp minorlinev/.style = {
       stampcolorb,
       line cap=butt,
       line width=0.15mm,
-      dash pattern=on \stampheight/3/2/2 off \stampheight/3/2/2,
-      dash phase=0.5*\stampheight/3/2/2 % alternative: 1.5
+      dash pattern=on \stampvdash off \stampvdash,
+      dash phase=0.5*\stampvdash % on-center: 0.5; off-center: 1.5
     },
   stamp minorlined/.style = {
       stampcolorb,
       line cap=butt,
       line width=0.15mm,
-      dash pattern=on \stampdiagonal/4/2/2 off \stampdiagonal/4/2/2,
-      dash phase=1.5*\stampdiagonal/4/2/2 % alternative: 0.5
+      dash pattern=on \stampddash off \stampddash,
+      dash phase=1.5*\stampddash % on-center: 0.5; off-center: 1.5
     },
   pics/stamp/.style={
       code={
+          % Diagonal
+          \draw [stamp minorlined]                                          (  45:0.5*\stampddash) -- +(  45:8.5*\stampddash);
+          \draw [stamp minorlined] [yshift=\stampheight]                    ( -45:0.5*\stampddash) -- +( -45:8.5*\stampddash);
+          \draw [stamp minorlined] [xshift=\stampwidth]                     ( 135:0.5*\stampddash) -- +( 135:8.5*\stampddash);
+          \draw [stamp minorlined] [xshift=\stampwidth,yshift=\stampheight] (-135:0.5*\stampddash) -- +(-135:8.5*\stampddash);
           % Horizontal
           \draw [stamp minorlineh] (0,\stampheight/2) -- (\stampwidth,\stampheight/2);
           % Vertical
           \draw [stamp minorlinev] (\stampwidth/2,0) -- (\stampwidth/2,\stampheight);
-          % Diagonal
-          \draw [stamp minorlined] (0,0) -- (\stampwidth,\stampheight);
-          \draw [stamp minorlined] (0,\stampheight) -- (\stampwidth,0);
           % Horizontal
           \draw [stamp majorline ] (0,           0  ) -- (\stampwidth,           0  );
           \draw [stamp majorline ] (0,\stampheight  ) -- (\stampwidth,\stampheight  );

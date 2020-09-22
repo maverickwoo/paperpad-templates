@@ -12,9 +12,10 @@
 \def\stampwidth {13mm}\def\stamphsep{0mm}
 
 % Declare a tikz pic for stamping onto the grid
-\providecolor{stampcolora}{cmyk:named}{magenta!66!yellow}
-\providecolor{stampcolorb}{cmyk:named}{cyan!66!yellow}
-% todo: minor dashed lines need v and h due to pattern
+\providecolor{stampcolora}{cmyk:named}{magenta!66!yellow!50}
+\providecolor{stampcolorb}{cmyk:named}{cyan!66!yellow!60}
+\pgfmathsetlengthmacro{\stamphdash}{\stampwidth/3/2/2}
+\pgfmathsetlengthmacro{\stampvdash}{\stampheight/3/2/2}
 \tikzset{
   stamp majorline/.style = {
       stampcolora,
@@ -25,15 +26,15 @@
       stampcolorb,
       line cap=butt,
       line width=0.15mm,
-      dash pattern=on \stampwidth/3/3/2 off \stampwidth/3/3/2,
-      dash phase=0.5*\stampwidth/3/3/2 % alternative: 1.5
+      dash pattern=on \stamphdash off \stamphdash,
+      dash phase=0.5*\stamphdash % on-center: 0.5; off-center: 1.5
     },
   stamp minorlinev/.style = {
       stampcolorb,
       line cap=butt,
       line width=0.15mm,
-      dash pattern=on \stampheight/3/3/2 off \stampheight/3/3/2,
-      dash phase=0.5*\stampheight/3/3/2 % alternative: 1.5
+      dash pattern=on \stampvdash off \stampvdash,
+      dash phase=0.5*\stampvdash % on-center: 0.5; off-center: 1.5
     },
   pics/stamp/.style={
       code={
