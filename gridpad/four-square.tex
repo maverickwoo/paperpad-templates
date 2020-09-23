@@ -8,65 +8,67 @@
 \def\gridname{four-square grid (田字格)}
 
 % Declare stamp dimensions and separations
-\def\stampheight{13mm}\def\stampvsep{0mm}
-\def\stampwidth {13mm}\def\stamphsep{0mm}
+\def\sxlen{11mm}\def\sxsep{0mm}
+\def\sylen{11mm}\def\sysep{0mm}
 
 % Declare a tikz pic for stamping onto the grid
-\providecolor{stampcolora}{cmyk:named}{magenta!66!yellow!50}
-\providecolor{stampcolorb}{cmyk:named}{cyan!66!yellow!60}
-\pgfmathsetlengthmacro{\stamphdash}{\stampwidth/3/2/2}
-\pgfmathsetlengthmacro{\stampvdash}{\stampheight/3/2/2}
+\providecolor{scolora}{cmyk:named}{magenta!66!yellow!50}
+\providecolor{scolorb}{cmyk:named}{cyan!66!yellow!60}
+\pgfmathsetlengthmacro{\sxdash}{\sxlen/3/2/2}
+\pgfmathsetlengthmacro{\sydash}{\sylen/3/2/2}
 \tikzset{
-  stamp majorline/.style = {
-      stampcolora,
+  /s/major/x/.style = {
+      scolora,
       line cap=rect,
       line width=0.3mm
     },
-  stamp minorlineh/.style = {
-      stampcolorb,
-      line cap=butt,
-      line width=0.15mm,
-      dash pattern=on \stamphdash off \stamphdash,
-      dash phase=0.5*\stamphdash % on-center: 0.5; off-center: 1.5
+  /s/major/y/.style = {
+      scolora,
+      line cap=rect,
+      line width=0.3mm
     },
-  stamp minorlinev/.style = {
-      stampcolorb,
+  /s/minor/x/.style = {
+      scolorb,
       line cap=butt,
       line width=0.15mm,
-      dash pattern=on \stampvdash off \stampvdash,
-      dash phase=0.5*\stampvdash % on-center: 0.5; off-center: 1.5
+      dash pattern=on \sxdash off \sxdash,
+      dash phase=0.5*\sxdash % on-center: 0.5; off-center: 1.5
+    },
+  /s/minor/y/.style = {
+      scolorb,
+      line cap=butt,
+      line width=0.15mm,
+      dash pattern=on \sydash off \sydash,
+      dash phase=0.5*\sydash % on-center: 0.5; off-center: 1.5
     },
   pics/stamp/.style={
       code={
-          % Horizontal
-          \draw [stamp minorlineh] (0,\stampheight/2) -- (\stampwidth,\stampheight/2);
-          % Vertical
-          \draw [stamp minorlinev] (\stampwidth/2,0) -- (\stampwidth/2,\stampheight);
-          % Horizontal
-          \draw [stamp majorline ] (0,           0  ) -- (\stampwidth,           0  );
-          \draw [stamp majorline ] (0,\stampheight  ) -- (\stampwidth,\stampheight  );
-          % Vertical
-          \draw [stamp majorline ] (          0  ,0) -- (          0  ,\stampheight);
-          \draw [stamp majorline ] (\stampwidth  ,0) -- (\stampwidth  ,\stampheight);
+          \draw [/s/minor/x] (0,\sylen/2) -- +(\sxlen,0);
+          \draw [/s/minor/y] (\sxlen/2,0) -- +(0,\sylen);
+
+          \draw [/s/major/x] (0,     0) -- +(\sxlen,0);
+          \draw [/s/major/x] (0,\sylen) -- +(\sxlen,0);
+          \draw [/s/major/y] (     0,0) -- +(0,\sylen);
+          \draw [/s/major/y] (\sxlen,0) -- +(0,\sylen);
         }
     }
 }
 
 % Compute the number of stamps that can fit in printable area
-\pgfmathsetmacro{\nx}{int((\textwidth +\stamphsep)/(\stampwidth +\stamphsep))}
-\pgfmathsetmacro{\ny}{int((\textheight+\stampvsep)/(\stampheight+\stampvsep))}
+\pgfmathsetmacro{\nx}{int((\textwidth +\sxsep)/(\sxlen+\sxsep))}
+\pgfmathsetmacro{\ny}{int((\textheight+\sysep)/(\sylen+\sysep))}
 
 % Set PDF properties
-\extractcolorspec{stampcolora}{\stampcolora}
-\extractcolorspec{stampcolorb}{\stampcolorb}
-\def\pdftitle{\ny*\nx{} \gridname{} of \stampheight-by-\stampwidth{} squares}
+\extractcolorspec{scolora}{\scolora}
+\extractcolorspec{scolorb}{\scolorb}
+\def\pdftitle{\ny*\nx{} \gridname{} of \sylen-by-\sxlen{} squares}
 \hypersetup{
   pdftitle=\pdftitle,
   pdfkeywords={%
       \ny*\nx{} \gridname,
-      h,s: \stampheight{} | \stampvsep,
-      w,s: \stampwidth{} | \stamphsep,
-      c: \{\stampcolora; \stampcolorb\}
+      h: \sylen{} + \sysep,
+      w: \sxlen{} + \sxsep,
+      c: \{\scolora; \scolorb\}
     },
   pdfsubject={https://github.com/maverickwoo/paperpad-templates},
   pdfauthor={Maverick Woo}
