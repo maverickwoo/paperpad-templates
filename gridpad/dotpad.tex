@@ -8,18 +8,18 @@
 \def\gridname{dot pad}
 
 % Declare stamp dimensions and separations
-\def\stampheight{0mm}\def\stampvsep{5mm}
-\def\stampwidth {0mm}\def\stamphsep{5mm}
+\def\sxlen{0mm}\def\sxsep{5mm}
+\def\sylen{0mm}\def\sysep{5mm}
 
 % Declare a tikz pic for stamping onto the grid
-\providecolor{stampcolor}{cmyk:named}{black!40}
-\def\dotradius{0.2mm}
+\providecolor{scolora}{cmyk:named}{black!40}
+\pgfmathsetlengthmacro{\dotradius}{0.2mm}
 \tikzset{
   pics/stamp/.style={
       code={
           \fill circle (\dotradius)
           [
-              color=stampcolor,
+              color=scolora,
               inner sep=0mm,
               outer sep=0mm
             ];
@@ -28,20 +28,20 @@
 }
 
 % Compute the number of stamps that can fit in printable area
-\pgfmathsetmacro{\nx}{int((\textwidth +\stamphsep)/(\stampwidth +\stamphsep))}
-\pgfmathsetmacro{\ny}{int((\textheight+\stampvsep)/(\stampheight+\stampvsep))}
+\pgfmathsetmacro{\nx}{int((\textwidth +\sxsep)/(\sxlen+\sxsep))}
+\pgfmathsetmacro{\ny}{int((\textheight+\sysep)/(\sylen+\sysep))}
 
 % Set PDF properties
-\extractcolorspec{stampcolor}{\stampcolor}
-\def\pdftitle{\ny*\nx{} \gridname{} with \stampvsep-by-\stamphsep{} spaces}
+\extractcolorspec{scolora}{\scolora}
+\def\pdftitle{\ny*\nx{} \gridname{} with \sysep-by-\sxsep{} spaces}
 \hypersetup{
   pdftitle=\pdftitle,
   pdfkeywords={%
       \ny*\nx{} \gridname,
-      h,s: \stampheight{} | \stampvsep,
-      w,s: \stampwidth{} | \stamphsep,
+      h: \sylen{} + \sysep,
+      w: \sxlen{} + \sxsep,
       r: \dotradius,
-      c: \{\stampcolor\}
+      c: \{\scolora\}
     },
   pdfsubject={https://github.com/maverickwoo/paperpad-templates},
   pdfauthor={Maverick Woo}
