@@ -13,7 +13,7 @@
 
 % Declare a tikz pic for stamping onto the grid
 \providecolor{scolora}{cmyk:named}{black!40}
-\pgfmathsetlengthmacro{\dotradius}{0.2mm}
+\def\dotradius{0.2mm} % this should stay a human-readable string
 \tikzset{
   pics/stamp/.style={
       code={
@@ -38,8 +38,8 @@
   pdftitle=\pdftitle,
   pdfkeywords={%
       \ny*\nx{} \gridname,
-      h: \sylen{} + \sysep,
-      w: \sxlen{} + \sxsep,
+      h: \sylen+\sysep,
+      w: \sxlen+\sxsep,
       r: \dotradius,
       c: \{\scolora\}
     },
