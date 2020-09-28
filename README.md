@@ -3,7 +3,7 @@
 This repository contains LaTeX templates for making DIY paper pads. Currently,
 it contains templates for:
 
-* [Grid pads](gridpad)
+* [Grid pads](grid)
 
 # License
 
