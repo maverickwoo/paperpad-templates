@@ -1,17 +1,17 @@
 # Introduction
 
-The files in this directory define multiple types of grid pad templates. Each
+The files in this directory define multiple types of grid templates. Each
 template is defined by three files:
 
 1. `paper-printer.tex`, which defines the parameters related to the target paper
    type (e.g., a4 vs. letter, landscape vs. portrait) and the production printer
-   (e.g., unprintable margin).
+   (e.g., unprintable margins).
 
-2. A main file named after the grid, which defines the grid parameters.
+2. A main file named after the template, which defines the template parameters.
 
-3. `body.tex`, which typesets the grid into a one-page PDF.
+3. `body.tex`, which typesets the template into a one-page PDF.
 
-## Generating Your Own Template PDFs Using Overleaf.com
+# Generating Your Own Template PDFs Using Overleaf.com
 
 If you do not have LaTeX on your computer, you can use
 [Overleaf.com](https://overleaf.com) to generate your own template PDFs. Click
