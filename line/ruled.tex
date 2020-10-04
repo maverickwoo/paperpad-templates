@@ -15,12 +15,13 @@
 \def\capNW{8}
 \def\xheightNW{4}
 \def\descenderNW{5}
-\def\ysepNW{1}
+\def\yoffsetNW{0}
+\def\ysepNW{0}
 
 % Declare slanted guidelines using nib width
 \def\slantdegree{65}
-\def\slantsepNW{9}
-\def\slantoffsetNW{5.5}
+\def\xoffsetNW{5.5}
+\def\xsepNW{9}
 
 % Declare line colors
 \providecolor{scolora}{cmyk:named}{cyan!66!yellow!40}
@@ -37,68 +38,79 @@
       line cap=butt,
       line width=0.2mm,
       dash pattern=on 2*\nibwidth off \nibwidth,
-      dash phase=\ay/tan(\slantdegree)
+      dash phase=\depthy/tan(\slantdegree)
     },
   /s/cap/.style = {
       scolorc,
       line cap=round,
       line width=0.2mm,
       dash pattern=on 0*\nibwidth off \nibwidth,
-      dash phase=(\ay+(\ascenderNW-\capNW)*\nibwidth)/tan(\slantdegree)-\nibwidth/2
+      dash phase=(\depthy+(\ascenderNW-\capNW)*\nibwidth)/tan(\slantdegree)+\nibwidth/2
     },
   /s/xheight/.style = {
       scolorx,
       line cap=butt,
-      line width=0.1mm,
+      line width=0.1mm
     },
   /s/baseline/.style = {
       scolorb,
       line cap=butt,
-      line width=0.1mm,
+      line width=0.1mm
+    },
+  /s/basecircle/.style = {
+      scolorb,
+      %fill=white,
+      line width=0.2mm
     },
   /s/descender/.style = {
       scolord,
       line cap=butt,
       line width=0.2mm,
       dash pattern=on 2*\nibwidth off \nibwidth,
-      dash phase=(\ay+(\ascenderNW+\descenderNW)*\nibwidth)/tan(\slantdegree)
+      dash phase=(\depthy+(\ascenderNW+\descenderNW)*\nibwidth)/tan(\slantdegree)
     },
   pics/ystamp/.style={
       code={
-          \draw [/s/ascender]  (${\descenderNW+\ascenderNW}*(0,\nibwidth)$) -- +(\totalwidth,0);
-          \draw [/s/cap]       (${\descenderNW+\capNW     }*(0,\nibwidth)$) -- +(\totalwidth,0);
-          \draw [/s/xheight]   (${\descenderNW+\xheightNW }*(0,\nibwidth)$) -- +(\totalwidth,0);
-          \draw [/s/baseline]  (${\descenderNW            }*(0,\nibwidth)$) -- +(\totalwidth,0);
-          \draw [/s/descender] (${0                       }*(0,\nibwidth)$) -- +(\totalwidth,0);
-          % Baseline circle
-          \draw [/s/baseline]  (${\descenderNW            }*(0,\nibwidth)$) circle (\nibwidth/2) [fill=white];
+          \coordinate (v) at (0,\nibwidth);
+
+          % Guide lines (remove cap line if desired)
+          \draw [/s/ascender]  (${\descenderNW+\ascenderNW}*(v)$) -- +(\totalwidth,0);
+          \draw [/s/cap]       (${\descenderNW+\capNW     }*(v)$) -- +(\totalwidth,0);
+          \draw [/s/xheight]   (${\descenderNW+\xheightNW }*(v)$) -- +(\totalwidth,0);
+          \draw [/s/baseline]  (${\descenderNW            }*(v)$) -- +(\totalwidth,0);
+          \draw [/s/descender] (${0                       }*(v)$) -- +(\totalwidth,0);
+
+          % Uncomment the next line for a circle at baseline start
+          % \draw [/s/basecircle](${\descenderNW            }*(v)$) circle (\nibwidth/2);
         }
     }
 }
 
 % Declare a tikz pic for stamping left to right
 \tikzset{
-  /s/slanted/guide/.style = {
+  /s/slant/guide/.style = {
       scolors,
       line cap=round,
       line width=0.2mm,
-      xshift=\slantoffsetNW*\nibwidth,
       dash pattern=on 0*\nibwidth off \nibwidth/sin(\slantdegree)
     },
-  /s/slanted/ends/.style = {
+  /s/slant/ends/.style = {
       scolors,
+      fill=white,
       line cap=round,
-      line width=0.2mm,
-      xshift=\slantoffsetNW*\nibwidth
+      line width=0.2mm
     },
   pics/xstamp/.style={
       code={
-          % Uncomment the next three lines if you want the end arcs
-          % \draw [/s/slanted/ends, shift=(-180:  \nibwidth/2),fill=white]
-          % (0,0)                     arc ( 180:0:\nibwidth/2)
-          % (\slantdegree-180:\sslen) arc (-180:0:\nibwidth/2);
+          \coordinate (b) at (\sxoff,-\syoff);
+          \coordinate (e) at ($(b)+(\slantdegree-180:{\slantlen})$);
 
-          \draw [/s/slanted/guide] (0,0) -- (\slantdegree-180:\sslen);
+          % Uncomment the next three lines for end arcs
+          % \draw [/s/slant/ends]
+          % ([xshift=-\nibwidth/2] b) arc ( 180:0:\nibwidth/2)
+          % ([xshift=-\nibwidth/2] e) arc (-180:0:\nibwidth/2);
+
+          \draw [/s/slant/guide] (b) -- (e);
         }
     }
 }
@@ -107,15 +119,19 @@
 
 % Everything below this line is not intended to be user-configurable
 
+% Macro for maximum length of slanted guides (depends on \totalheight)
+\def\slantlen{(\totalheight-\syoff)/sin(\slantdegree)}
+
 % Compute stamping lengths and separations
-\pgfmathsetlengthmacro{\sxlen}{0mm}
-\pgfmathsetlengthmacro{\sxsep}{\nibwidth*\slantsepNW}
-\pgfmathsetlengthmacro{\sylen}{\nibwidth*(\ascenderNW+\descenderNW)}
-\pgfmathsetlengthmacro{\sysep}{\nibwidth*\ysepNW}
+\pgfmathsetlengthmacro{\sxsep}{\xsepNW*\nibwidth}
+\pgfmathsetlengthmacro{\sxoff}{\xoffsetNW*\nibwidth}
+\pgfmathsetlengthmacro{\sylen}{(\ascenderNW+\descenderNW)*\nibwidth}
+\pgfmathsetlengthmacro{\sysep}{\ysepNW*\nibwidth}
+\pgfmathsetlengthmacro{\syoff}{\yoffsetNW*\nibwidth}
 
 % Compute the number of stamps that can fit in printable area
-\pgfmathsetmacro{\nx}{int((\textwidth +\sxsep)/(\sxlen+\sxsep))}
-\pgfmathsetmacro{\ny}{int((\textheight+\sysep)/(\sylen+\sysep))}
+\pgfmathsetmacro{\nx}{int((\textwidth+\textheight/tan(\slantdegree))/\sxsep)}
+\pgfmathsetmacro{\ny}{int((\textheight+\sysep-\syoff)/(\sylen+\sysep))}
 
 % Set PDF properties
 \extractcolorspec{scolora}{\scolora}
@@ -129,13 +145,13 @@
   caps at \capNW{} nibs,
   x-height at \xheightNW{} nibs,
   descender at -\descenderNW{} nibs,
-  and \slantdegree\textdegree-guides separated at \slantsepNW{} nibs}
+  and \slantdegree\textdegree-guides separated at \xsepNW{} nibs}
 \hypersetup{
   pdftitle=\pdftitle,
   pdfkeywords={%
       \template,
-      a=\scolora; c=\scolorc;,
-      x=\scolorx; b=\scolorb;,
+      a=\scolora; c=\scolorc,
+      x=\scolorx; b=\scolorb,
       d=\scolord; s=\scolors,
     },
   pdfsubject={https://github.com/maverickwoo/paperpad-templates},

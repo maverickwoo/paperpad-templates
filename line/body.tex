@@ -18,33 +18,28 @@
   % Compute origin coordinate
   \pgfmathsetlengthmacro{\totalwidth}{\textwidth}
   \pgfmathsetlengthmacro{\marginx}{(\paperwidth-\totalwidth)/2}
-  \pgfmathsetlengthmacro{\totalheight}{\ny*\sylen+(\ny-1)*\sysep}
+  \pgfmathsetlengthmacro{\totalheight}{\ny*\sylen+(\ny-1)*\sysep+\syoff}
   \pgfmathsetlengthmacro{\marginy}{(\paperheight-\totalheight)/2}
   \coordinate (origin) at ($(current page.south west) + (\marginx,\marginy)$);
 
-  % Print top-to-bottom stamps
+  % Print y-stamps from top to bottom
   \foreach \iy in {\ny,...,1}
     {
-      % Compute the y-coordinate of the current ascender for phase computations
-      \pgfmathsetlengthmacro{\ay}{(\ny-\iy)*(\sylen+\sysep)}
-      % Draw stamp
-      \pgfmathsetlengthmacro{\dy}{(\iy-  1)*(\sylen+\sysep)}
-      \draw ($(origin)+(0,\dy)$) pic {ystamp};
+      % depth of current ascender for dash phase computations
+      \pgfmathsetlengthmacro{\depthy}{(\ny-\iy)*(\sylen+\sysep)}
+      \pgfmathsetlengthmacro{\deltay}{(\iy-  1)*(\sylen+\sysep)}
+      \draw ($(origin)+(0,\deltay)$) pic {ystamp};
     }
 
   % Clip slanted guides at horizontal margins
-  \clip     ($(origin)-(0,\marginy)$)
+  \clip ($(origin)-(0,\marginy)$)
   rectangle ($(origin)+(0,\marginy)+(\totalwidth,\totalheight)$);
 
-  % Computed maximum length of slanted guides
-  \pgfmathsetlengthmacro{\sslen}{\totalheight/sin(\slantdegree)}
-
-  % Print left-to-right stamps
-  \pgfmathsetmacro{\ns}{1+\nx+int(\totalheight/tan(\slantdegree)/\sxsep)}
-  \foreach \ix in {1,...,\ns}
+  % Print x-stamps from left to right
+  \foreach \ix in {1,...,\nx}
     {
-      \pgfmathsetlengthmacro{\dx}{(\ix-1)*\sxsep}
-      \draw ($(origin)+(\dx,\totalheight)$) pic {xstamp};
+      \pgfmathsetlengthmacro{\deltax}{(\ix-1)*\sxsep}
+      \draw ($(origin)+(\deltax,\totalheight)$) pic {xstamp};
     }
 
 \end{tikzpicture}
