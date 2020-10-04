@@ -1,0 +1,52 @@
+% !TeX root = ./explain.tex
+% This file is not intended to contain any user-adjustable parameters.
+
+\begin{document}
+
+\begin{tikzpicture}[remember picture,overlay]
+
+  % Add watermark
+  \node [font=\ttfamily\tiny,color=black!20]
+  at ($(current page text area.north) - (0mm,0.5ex)$) {
+    \href{https://github.com/maverickwoo/paperpad-templates}{\number\year-\number\month-\number\day}
+  };
+  \node [font=\ttfamily\tiny,color=black!20]
+  at ($(current page text area.south) + (0mm,0.5ex)$) {
+    \href{https://github.com/maverickwoo/paperpad-templates}{\pdftitle}
+  };
+
+  % Compute origin coordinate
+  \pgfmathsetlengthmacro{\totalwidth}{\textwidth}
+  \pgfmathsetlengthmacro{\marginx}{(\paperwidth-\totalwidth)/2}
+  \pgfmathsetlengthmacro{\totalheight}{\ny*\sylen+(\ny-1)*\sysep}
+  \pgfmathsetlengthmacro{\marginy}{(\paperheight-\totalheight)/2}
+  \coordinate (origin) at ($(current page.south west) + (\marginx,\marginy)$);
+
+  % Print top-to-bottom stamps
+  \foreach \iy in {\ny,...,1}
+    {
+      % Compute the y-coordinate of the current ascender for phase computations
+      \pgfmathsetlengthmacro{\ay}{(\ny-\iy)*(\sylen+\sysep)}
+      % Draw stamp
+      \pgfmathsetlengthmacro{\dy}{(\iy-  1)*(\sylen+\sysep)}
+      \draw ($(origin)+(0,\dy)$) pic {ystamp};
+    }
+
+  % Clip slanted guides at horizontal margins
+  \clip     ($(origin)-(0,\marginy)$)
+  rectangle ($(origin)+(0,\marginy)+(\totalwidth,\totalheight)$);
+
+  % Computed maximum length of slanted guides
+  \pgfmathsetlengthmacro{\sslen}{\totalheight/sin(\slantdegree)}
+
+  % Print left-to-right stamps
+  \pgfmathsetmacro{\ns}{1+\nx+int(\totalheight/tan(\slantdegree)/\sxsep)}
+  \foreach \ix in {1,...,\ns}
+    {
+      \pgfmathsetlengthmacro{\dx}{(\ix-1)*\sxsep}
+      \draw ($(origin)+(\dx,\totalheight)$) pic {xstamp};
+    }
+
+\end{tikzpicture}
+
+\end{document}
