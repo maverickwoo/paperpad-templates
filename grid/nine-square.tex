@@ -17,24 +17,24 @@
 \pgfmathsetlengthmacro{\sxdash}{\sxlen/3/2/2}
 \pgfmathsetlengthmacro{\sydash}{\sylen/3/2/2}
 \tikzset{
-  /s/major/x/.style = {
+  /s/major/x/.style={
       scolora,
       line cap=rect,
       line width=0.3mm
     },
-  /s/major/y/.style = {
+  /s/major/y/.style={
       scolora,
       line cap=rect,
       line width=0.3mm
     },
-  /s/minor/x/.style = {
+  /s/minor/x/.style={
       scolorb,
       line cap=butt,
       line width=0.15mm,
       dash pattern=on \sxdash off \sxdash,
       dash phase=0.5*\sxdash % on-center: 0.5; off-center: 1.5
     },
-  /s/minor/y/.style = {
+  /s/minor/y/.style={
       scolorb,
       line cap=butt,
       line width=0.15mm,
