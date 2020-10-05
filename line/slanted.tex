@@ -1,14 +1,15 @@
 % !TeX root = ./slanted.tex
-\documentclass[UTF8]{ctexart}
+
+\documentclass[UTF8,11pt]{ctexart}
 
 % Adjust paper and printer parameters in the following file
 \input{paper-printer}
 
 % Declare template name
-\def\template{ruled lines with slanted guides}
+\def\template{ruled lines with slant guidelines}
 
 % Declare nib width as a basic unit
-\def\nibwidth{1.1mm}
+\def\nibwidth{0.8mm}
 
 % Declare horizontal guidelines using letter proportions and nib width
 \def\ascenderNW{9}
@@ -18,7 +19,7 @@
 \def\yoffsetNW{0}
 \def\ysepNW{0}
 
-% Declare slanted guidelines using nib width
+% Declare slant guidelines using nib width
 \def\slantdegree{65}
 \def\xoffsetNW{5.5}
 \def\xsepNW{9}
@@ -31,54 +32,64 @@
 \providecolor{scolord}{cmyk:named}{cyan!66!yellow!40}
 \providecolor{scolors}{cmyk:named}{black!40}
 
-% Declare a tikz pic for stamping top to bottom
+% Declare a tikz pic for stamping top to bottom; uses \depthy
 \tikzset{
-  /s/ascender/.style = {
+  /s/ascender/.style=
+    {
       scolora,
       line cap=butt,
       line width=0.2mm,
       dash pattern=on 2*\nibwidth off \nibwidth,
       dash phase=\depthy/tan(\slantdegree)
     },
-  /s/cap/.style = {
+  /s/cap/.style=
+    {
       scolorc,
       line cap=round,
       line width=0.2mm,
       dash pattern=on 0*\nibwidth off \nibwidth,
       dash phase=(\depthy+(\ascenderNW-\capNW)*\nibwidth)/tan(\slantdegree)+\nibwidth/2
     },
-  /s/xheight/.style = {
+  /s/xheight/.style=
+    {
       scolorx,
       line cap=butt,
       line width=0.1mm
     },
-  /s/baseline/.style = {
+  /s/baseline/.style=
+    {
       scolorb,
       line cap=butt,
       line width=0.1mm
     },
-  /s/basecircle/.style = {
+  /s/basecircle/.style=
+    {
       scolorb,
-      %fill=white,
+      fill=white,
       line width=0.2mm
     },
-  /s/descender/.style = {
+  /s/descender/.style=
+    {
       scolord,
       line cap=butt,
       line width=0.2mm,
       dash pattern=on 2*\nibwidth off \nibwidth,
       dash phase=(\depthy+(\ascenderNW+\descenderNW)*\nibwidth)/tan(\slantdegree)
     },
-  pics/ystamp/.style={
-      code={
+  pics/ystamp/.style=
+    {
+      code=
+        {
+          % Define basis
+          \coordinate (u) at (\totalwidth,0);
           \coordinate (v) at (0,\nibwidth);
 
-          % Guide lines (remove cap line if desired)
-          \draw [/s/ascender]  (${\descenderNW+\ascenderNW}*(v)$) -- +(\totalwidth,0);
-          \draw [/s/cap]       (${\descenderNW+\capNW     }*(v)$) -- +(\totalwidth,0);
-          \draw [/s/xheight]   (${\descenderNW+\xheightNW }*(v)$) -- +(\totalwidth,0);
-          \draw [/s/baseline]  (${\descenderNW            }*(v)$) -- +(\totalwidth,0);
-          \draw [/s/descender] (${0                       }*(v)$) -- +(\totalwidth,0);
+          % Draw guide lines (remove cap line if desired)
+          \draw [/s/ascender]  (${\descenderNW+\ascenderNW}*(v)$) -- +(u);
+          \draw [/s/cap]       (${\descenderNW+\capNW     }*(v)$) -- +(u);
+          \draw [/s/xheight]   (${\descenderNW+\xheightNW }*(v)$) -- +(u);
+          \draw [/s/baseline]  (${\descenderNW            }*(v)$) -- +(u);
+          \draw [/s/descender] (${0                       }*(v)$) -- +(u);
 
           % Uncomment the next line for a circle at baseline start
           % \draw [/s/basecircle](${\descenderNW            }*(v)$) circle (\nibwidth/2);
@@ -88,28 +99,34 @@
 
 % Declare a tikz pic for stamping left to right
 \tikzset{
-  /s/slant/guide/.style = {
+  /s/slant/guide/.style=
+    {
       scolors,
       line cap=round,
       line width=0.2mm,
       dash pattern=on 0*\nibwidth off \nibwidth/sin(\slantdegree)
     },
-  /s/slant/ends/.style = {
+  /s/slant/ends/.style=
+    {
       scolors,
       fill=white,
       line cap=round,
       line width=0.2mm
     },
-  pics/xstamp/.style={
-      code={
+  pics/xstamp/.style=
+    {
+      code=
+        {
+          % Define begin and end points
           \coordinate (b) at (\sxoff,-\syoff);
           \coordinate (e) at ($(b)+(\slantdegree-180:{\slantlen})$);
 
-          % Uncomment the next three lines for end arcs
+          % Uncomment the next three lines to draw end arcs
           % \draw [/s/slant/ends]
           % ([xshift=-\nibwidth/2] b) arc ( 180:0:\nibwidth/2)
           % ([xshift=-\nibwidth/2] e) arc (-180:0:\nibwidth/2);
 
+          % Draw slant guidelines
           \draw [/s/slant/guide] (b) -- (e);
         }
     }
@@ -119,7 +136,7 @@
 
 % Everything below this line is not intended to be user-configurable
 
-% Macro for maximum length of slanted guides (depends on \totalheight)
+% Macro for maximum length of slant guidelines; depends on \totalheight
 \def\slantlen{(\totalheight-\syoff)/sin(\slantdegree)}
 
 % Compute stamping lengths and separations
@@ -140,15 +157,18 @@
 \extractcolorspec{scolorb}{\scolorb}
 \extractcolorspec{scolord}{\scolord}
 \extractcolorspec{scolors}{\scolors}
-\def\pdftitle{\ny{} \template{} for \nibwidth{} nibs, with
-  ascender at \ascenderNW{} nibs,
-  caps at \capNW{} nibs,
-  x-height at \xheightNW{} nibs,
+\def\pdftitle{%
+  \ny{} \template{} for \nibwidth{} nibs, with
+  ascender  at \ascenderNW{}   nibs,
+  caps      at \capNW{}        nibs,
+  x-height  at \xheightNW{}    nibs,
   descender at -\descenderNW{} nibs,
-  and \slantdegree\textdegree-guides separated at \xsepNW{} nibs}
+  and \slantdegree\textdegree-guides separated by \xsepNW{} nibs
+}
 \hypersetup{
   pdftitle=\pdftitle,
-  pdfkeywords={%
+  pdfkeywords=
+    {%
       \template,
       a=\scolora; c=\scolorc,
       x=\scolorx; b=\scolorb,
