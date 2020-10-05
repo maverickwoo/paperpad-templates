@@ -1,15 +1,17 @@
 # Introduction
 
 The files in this directory define multiple types of lined templates. Each
-template is defined by three files:
+template is defined by the following files:
 
-1. `paper-printer.tex`, which defines the parameters related to the target paper
-   type (e.g., a4 vs. letter, landscape vs. portrait) and the production printer
-   (e.g., unprintable margins).
+1. `printer-paper.tex`, which defines the parameters related to the production
+   printer (e.g., unprintable margins) and the target paper dimensions (e.g., a4
+   vs. letter, landscape vs. portrait).
 
 2. A main file named after the template, which defines the template parameters.
 
-3. `body.tex`, which typesets the template into a one-page PDF.
+3. `preamble.tex`, which sets up the document.
+
+4. `body.tex`, which typesets the template into a one-page PDF.
 
 # Generating Your Own Template PDFs Using Overleaf.com
 
@@ -28,6 +30,6 @@ instructions](https://www.overleaf.com/learn/how-to/Exporting_your_work_from_Ove
 to preserve this page.)
 
 1. Open ruled sheet with slant guidelines
-   ([a4](https://www.overleaf.com/docs?engine=xelatex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/slant.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/paper-printer-a4.tex&snip_name[]=body.tex&snip_name[]=slant.tex&snip_name[]=paper-printer.tex),
-   [letter](https://www.overleaf.com/docs?engine=xelatex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/slant.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/paper-printer.tex))
+   ([a4](https://www.overleaf.com/docs?engine=xelatex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/preamble.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/slant.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/printer-paper-a4.tex&snip_name[]=preamble.tex&snip_name[]=body.tex&snip_name[]=slant.tex&snip_name[]=printer-paper.tex),
+   [letter](https://www.overleaf.com/docs?engine=xelatex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/preamble.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/slant.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/printer-paper.tex))
    on Overleaf
