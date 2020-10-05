@@ -27,7 +27,7 @@ instructions](https://www.overleaf.com/learn/how-to/Exporting_your_work_from_Ove
 (You can right-click on the links below and then select "Open Link in New Tab"
 to preserve this page.)
 
-1. Open ruled sheet with slanted guides
-   ([a4](https://www.overleaf.com/docs?engine=xelatex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/slanted.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/paper-printer-a4.tex&snip_name[]=body.tex&snip_name[]=slanted.tex&snip_name[]=paper-printer.tex),
-   [letter](https://www.overleaf.com/docs?engine=xelatex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/slanted.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/paper-printer.tex))
+1. Open ruled sheet with slant guidelines
+   ([a4](https://www.overleaf.com/docs?engine=xelatex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/slant.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/paper-printer-a4.tex&snip_name[]=body.tex&snip_name[]=slant.tex&snip_name[]=paper-printer.tex),
+   [letter](https://www.overleaf.com/docs?engine=xelatex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/slant.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/line/paper-printer.tex))
    on Overleaf
