@@ -14,7 +14,7 @@
 % margin of each border by simply measuring the width of the base of the
 % corresponding unprinted tip.
 
-\documentclass[UTF8,10pt]{ctexart}
+\documentclass[UTF8,11pt]{ctexart}
 
 \usepackage[
   letterpaper,
@@ -31,6 +31,8 @@
 \usetikzlibrary{calc}
 \usetikzlibrary{arrows.meta}
 \usepackage{tikzpagenodes}
+\usepackage{hyperref}
+\hypersetup{hidelinks}
 
 % Define an inverted isosceles triangle with base=height, with length labels
 \pgfmathsetmacro{\alpha}{atan(2)}
@@ -49,11 +51,20 @@
   }
 }
 
+% Set PDF properties
+\hypersetup{
+  pdftitle={\jobname},
+  pdfsubject={https://github.com/maverickwoo/paperpad-templates},
+  pdfauthor={Maverick Woo}
+}
+
 \begin{document}
+
+\footnotesize
 
 \begin{tikzpicture}[remember picture,overlay,
     shift=(current page.center),
-    line cap=butt,line width=0.4mm,
+    line cap=butt,line width=0.3mm,
     transform shape] % for rotating pics
 
   \def\h{2cm}
