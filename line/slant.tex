@@ -2,8 +2,9 @@
 
 \input{preamble}
 
-% Declare template name
+% Declare template
 \def\template{ruled sheet with slant guidelines}
+\providecolor{wmcolor}{cmyk:named}{black!20} % set to 0% to hide watermark
 
 % Declare nib width as a basic unit
 \def\nibwidth{0.8mm}
@@ -12,7 +13,7 @@
 \def\ascenderNW{9}
 \def\capNW{8}
 \def\xheightNW{4}
-\def\descenderNW{5}
+\def\descenderNW{6}
 \def\yoffsetNW{0}
 \def\ysepNW{0}
 
@@ -21,7 +22,7 @@
 \def\xoffsetNW{5.5}
 \def\xsepNW{9}
 
-% Declare line colors
+% Declare guideline colors
 \providecolor{scolora}{cmyk:named}{cyan!66!yellow!40}
 \providecolor{scolorc}{cmyk:named}{black!40}
 \providecolor{scolorx}{cmyk:named}{black!15}
@@ -133,15 +134,15 @@
 
 % Everything below this line is not intended to be user-configurable.
 
-% Macro for maximum length of slant guidelines; depends on \totalheight
+% Macro for maximum length of slant guidelines; uses \totalheight
 \def\slantlen{(\totalheight-\syoff)/sin(\slantdegree)}
 
 % Compute stamping lengths and separations
-\pgfmathsetlengthmacro{\sxsep}{\xsepNW*\nibwidth}
 \pgfmathsetlengthmacro{\sxoff}{\xoffsetNW*\nibwidth}
+\pgfmathsetlengthmacro{\sxsep}{\xsepNW*\nibwidth}
+\pgfmathsetlengthmacro{\syoff}{\yoffsetNW*\nibwidth}
 \pgfmathsetlengthmacro{\sylen}{(\ascenderNW+\descenderNW)*\nibwidth}
 \pgfmathsetlengthmacro{\sysep}{\ysepNW*\nibwidth}
-\pgfmathsetlengthmacro{\syoff}{\yoffsetNW*\nibwidth}
 
 % Compute the number of stamps that can fit in printable area
 \pgfmathsetmacro{\nx}{int((\textwidth+\textheight/tan(\slantdegree))/\sxsep)}
