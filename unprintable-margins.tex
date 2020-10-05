@@ -1,0 +1,71 @@
+% !TeX root = ./unprintable-margins.tex
+
+% The purpose of this document is to help us measure the unprintable margins of
+% a printer. This document prints four special isosceles triangles pointing at
+% the four paper borders with a deliberate zero margin. These triangles are
+% designed to have identical heights and bases; therefore, the base of an
+% unprinted tip should have the same length as the unprintable (and thus
+% unprinted) margin of the corresponding border. This equality often does *not*
+% hold, however, due to the mechanical inaccuracy in paper feeding, which
+% differs from sheet to sheet. Since it is difficult to account for the
+% feed-induced offset of a test print, we should not rely on the measurements of
+% the unprinted margins of a single test print. Fortunately, a single test print
+% is still sufficient for our purpose because we can deduce the unprintable
+% margin of each border by simply measuring the width of the base of the
+% corresponding unprinted tip.
+
+\documentclass[UTF8,10pt]{ctexart}
+
+\usepackage[
+  letterpaper,
+  %landscape, % default=portrait; uncomment to rotate (be sure to fix margin!)
+  margin=0mm
+]{geometry}
+
+\usepackage{libertine}
+\usepackage{libertinust1math}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+\usepackage{tikzpagenodes}
+
+% Define an inverted isosceles triangle with base=height, with length labels
+\pgfmathsetmacro{\alpha}{atan(2)}
+\tikzset{
+  pics/iso/.style={
+    code={
+      \pgfmathsetlengthmacro{\hypotenuse}{#1/sin(\alpha)}
+      \draw (0,0)
+      -- (\alpha:\hypotenuse)
+      -- (180-\alpha:\hypotenuse)
+      -- (0,0)
+      -- (0,#1)
+      node [above,rotate=90,pos=0.7] {h=#1}
+      node [above] {b=#1};
+    }
+  }
+}
+
+\begin{document}
+
+\begin{tikzpicture}[remember picture,overlay,
+    shift=(current page.center),
+    line cap=butt,line width=0.4mm,
+    transform shape] % for rotating pics
+
+  \def\h{2cm}
+
+  \draw                   (-\h/2,0) -- (\h/2,0)
+  [-{Latex[length=\h/8]}] (0,-\h/2) -- (0,\h/2);
+
+  \draw [rotate=  0] (current page.south) pic {iso=\h};
+  \draw [rotate= 90] (current page.east)  pic {iso=\h};
+  \draw [rotate=180] (current page.north) pic {iso=\h};
+  \draw [rotate=270] (current page.west)  pic {iso=\h};
+
+\end{tikzpicture}
+
+\end{document}
