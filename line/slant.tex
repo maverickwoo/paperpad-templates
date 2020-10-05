@@ -1,9 +1,6 @@
 % !TeX root = ./slant.tex
 
-\documentclass[UTF8,11pt]{ctexart}
-
-% Adjust paper and printer parameters in the following file
-\input{paper-printer}
+\input{preamble}
 
 % Declare template name
 \def\template{ruled sheet with slant guidelines}
@@ -134,7 +131,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Everything below this line is not intended to be user-configurable
+% Everything below this line is not intended to be user-configurable.
 
 % Macro for maximum length of slant guidelines; depends on \totalheight
 \def\slantlen{(\totalheight-\syoff)/sin(\slantdegree)}

@@ -14,14 +14,14 @@
   node at ($(current page text area.south)+(0mm,0.5ex)$) {
     \href{\repourl}{\pdftitle}};
 
-  % Compute origin coordinate
+  % Compute x and y margins to center page
   \pgfmathsetlengthmacro{\totalwidth}{\textwidth}
   \pgfmathsetlengthmacro{\marginx}{(\paperwidth-\totalwidth)/2}
-  \pgfmathsetlengthmacro{\totalheight}{\ny*\sylen+(\ny-1)*\sysep+\syoff}
+  \pgfmathsetlengthmacro{\totalheight}{\syoff+\ny*\sylen+(\ny-1)*\sysep}
   \pgfmathsetlengthmacro{\marginy}{(\paperheight-\totalheight)/2}
-  \coordinate (origin) at ($(current page.south west)+(\marginx,\marginy)$);
 
-  \begin{scope}[shift=(origin)]
+  % Compute and shift to new origin
+  \begin{scope}[shift={($(current page.south west)+(\marginx,\marginy)$)}]
 
     % Print y-stamps from top to bottom
     \foreach \iy in {\ny,...,1}
@@ -32,7 +32,7 @@
         \draw (0,\deltay) pic {ystamp};
       }
 
-    % Clip slant guidelines at horizontal margins
+    % Clip slant guidelines at x margins
     \clip     (          0,            -\marginy)
     rectangle (\totalwidth,\totalheight+\marginy);
 
