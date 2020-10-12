@@ -1,0 +1,100 @@
+% !TeX root = ./college-ruled.tex
+
+% Overleaf detects the main file by \documentclass
+\documentclass[UTF8,11pt,twoside]{ctexart}
+
+% The invariant part of the preamble
+\input{preamble}
+
+% Declare template
+\def\template{College-ruled sheet}
+\pgfmathsetmacro{\canvasvcentering}{!true}
+\pgfmathsetmacro{\canvashcentering}{true}
+
+% Declare offsets and separations of x- and y-stamps
+\def\xoffset{1in}
+\def\xsep{\textwidth}
+\def\yoffset{1in}
+\def\ysep{9in/32}
+
+% Declare guideline colors
+\providecolor{scolorh}{cmyk:named}{cyan!66!yellow!40}
+\providecolor{scolorv}{cmyk:named}{magenta!66!yellow!40}
+
+% Declare a tikz pic for stamping top to bottom
+\tikzset{
+  /s/h/.style=
+    {
+      scolorh,
+      line width=0.2mm
+    },
+  pics/y-stamp/.style=
+    {
+      code=
+        {
+          \draw [/s/h]
+          (0,    0) -- +(\picturewidth,0)
+          (0,\ysep) -- +(\picturewidth,0);
+        }
+    }
+}
+
+% Declare a tikz pic for stamping left to right
+\tikzset{
+  /s/v/.style=
+    {
+      scolorv,
+      line width=0.2mm
+    },
+  pics/x-stamp/.style=
+    {
+      code=
+        {
+          \draw [/s/v]
+          (0,0 |- canvas rect.north) -- (0,0 |- canvas rect.south);
+        }
+    }
+}
+
+% Compute stamping offsets, lengths, and separations
+\pgfmathsetlengthmacro{\sxoff}{\xoffset}
+\pgfmathsetlengthmacro{\sxlen}{0}
+\pgfmathsetlengthmacro{\sxsep}{\xsep}
+\pgfmathsetlengthmacro{\syoff}{\yoffset}
+\pgfmathsetlengthmacro{\sylen}{\ysep}
+\pgfmathsetlengthmacro{\sysep}{0}
+
+% Compute the number of stamps in picture
+\pgfmathsetmacro{\nx}{int((\canvaswidth-\sxoff)/\sxsep+1)}
+\pgfmathsetmacro{\ny}{int((\canvasheight-\syoff+\sysep)/(\sylen+\sysep))}
+
+% Compute picture height and width
+\pgfmathsetlengthmacro{\pictureheight}{\syoff+\ny*(\sylen+\sysep)-\sysep}
+\pgfmathsetlengthmacro{\picturewidth}{\canvaswidth}
+
+% Set PDF properties
+\providecolor{wmcolor}{cmyk:named}{black!0}
+\extractcolorspec{scolorh}{\scolorh}
+\extractcolorspec{scolorv}{\scolorv}
+\def\pdftitle{%
+  \ny-line \template{} (\ysep)
+}
+\hypersetup{
+  pdftitle=\pdftitle,
+  pdfkeywords=
+    {%
+      \template;
+      h=\scolorh; v=\scolorv
+    },
+  pdfsubject={https://github.com/maverickwoo/paperpad-templates},
+  pdfauthor={Maverick Woo}
+}
+
+\providecolor{wmcolor}{cmyk:named}{black!20}
+\def\pdftitle{%
+}
+
+% Go!
+\begin{document}
+\input{body}
+\end{document}

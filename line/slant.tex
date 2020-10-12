@@ -1,96 +1,94 @@
 % !TeX root = ./slant.tex
 
+% Overleaf detects the main file by \documentclass
+\documentclass[UTF8,11pt,twoside]{ctexart}
+
+% The invariant part of the preamble
 \input{preamble}
 
 % Declare template
-\def\template{ruled sheet with slant guidelines}
-\providecolor{wmcolor}{cmyk:named}{black!20} % set to 0% to hide watermark
+\def\template{Ruled sheet with slant guidelines}
+\pgfmathsetmacro{\canvasvcentering}{true}
+\pgfmathsetmacro{\canvashcentering}{true}
 
 % Declare nib width as a basic unit
 \def\nibwidth{0.8mm}
+\def\guidelinemajor{\nibwidth/4}
+\def\guidelineminor{\guidelinemajor/2}
 
 % Declare horizontal guidelines using letter proportions and nib width
 \def\ascenderNW{9}
 \def\capNW{8}
 \def\xheightNW{4}
 \def\descenderNW{6}
+\def\slantdegree{65}
+
+% Declare offsets and separations of x- and y-stamps
+\def\xoffsetNW{5.5}
+\def\xsepNW{9}
 \def\yoffsetNW{0}
 \def\ysepNW{0}
 
-% Declare slant guidelines using nib width
-\def\slantdegree{65}
-\def\xoffsetNW{5.5}
-\def\xsepNW{9}
-
 % Declare guideline colors
 \providecolor{scolora}{cmyk:named}{cyan!66!yellow!40}
-\providecolor{scolorc}{cmyk:named}{black!40}
+\providecolor{scolorc}{cmyk:named}{black!0}
 \providecolor{scolorx}{cmyk:named}{black!15}
 \providecolor{scolorb}{cmyk:named}{black!15}
 \providecolor{scolord}{cmyk:named}{cyan!66!yellow!40}
 \providecolor{scolors}{cmyk:named}{black!40}
 
-% Declare a tikz pic for stamping top to bottom; uses \depthy
+% Declare a tikz pic for stamping top to bottom
 \tikzset{
   /s/ascender/.style=
     {
       scolora,
       line cap=butt,
-      line width=0.2mm,
+      line width=\guidelinemajor,
       dash pattern=on 2*\nibwidth off \nibwidth,
-      dash phase=\depthy/tan(\slantdegree)
+      dash phase=\ydepth/tan(\slantdegree)
     },
   /s/cap/.style=
     {
       scolorc,
       line cap=round,
-      line width=0.2mm,
+      line width=\guidelineminor,
       dash pattern=on 0*\nibwidth off \nibwidth,
-      dash phase=(\depthy+(\ascenderNW-\capNW)*\nibwidth)/tan(\slantdegree)+\nibwidth/2
+      dash phase=(\ydepth+(\ascenderNW-\capNW)*\nibwidth)/tan(\slantdegree)+\nibwidth/2
     },
   /s/xheight/.style=
     {
       scolorx,
       line cap=butt,
-      line width=0.1mm
+      line width=\guidelineminor
     },
   /s/baseline/.style=
     {
       scolorb,
       line cap=butt,
-      line width=0.1mm
-    },
-  /s/basecircle/.style=
-    {
-      scolorb,
-      fill=white,
-      line width=0.2mm
+      line width=\guidelineminor
     },
   /s/descender/.style=
     {
       scolord,
       line cap=butt,
-      line width=0.2mm,
+      line width=\guidelinemajor,
       dash pattern=on 2*\nibwidth off \nibwidth,
-      dash phase=(\depthy+(\ascenderNW+\descenderNW)*\nibwidth)/tan(\slantdegree)
+      dash phase=(\ydepth+(\ascenderNW+\descenderNW)*\nibwidth)/tan(\slantdegree)
     },
-  pics/ystamp/.style=
+  pics/y-stamp/.style=
     {
       code=
         {
           % Define basis
-          \coordinate (u) at (\totalwidth,0);
+          \coordinate (u) at (\picturewidth,0);
           \coordinate (v) at (0,\nibwidth);
 
-          % Draw guide lines (remove cap line if desired)
+          % Draw guide lines (uncomment cap line if desired)
           \draw [/s/ascender]  (${\descenderNW+\ascenderNW}*(v)$) -- +(u);
           \draw [/s/cap]       (${\descenderNW+\capNW     }*(v)$) -- +(u);
           \draw [/s/xheight]   (${\descenderNW+\xheightNW }*(v)$) -- +(u);
           \draw [/s/baseline]  (${\descenderNW            }*(v)$) -- +(u);
           \draw [/s/descender] (${0                       }*(v)$) -- +(u);
-
-          % Uncomment the next line for a circle at baseline start
-          % \draw [/s/basecircle](${\descenderNW            }*(v)$) circle (\nibwidth/2);
         }
     }
 }
@@ -101,30 +99,29 @@
     {
       scolors,
       line cap=round,
-      line width=0.2mm,
+      line width=\guidelineminor,
       dash pattern=on 0*\nibwidth off \nibwidth/sin(\slantdegree)
     },
   /s/slant/ends/.style=
     {
       scolors,
-      fill=white,
       line cap=round,
-      line width=0.2mm
+      line width=\guidelinemajor
     },
-  pics/xstamp/.style=
+  pics/x-stamp/.style=
     {
       code=
         {
           % Define begin and end points
-          \coordinate (b) at (\sxoff,-\syoff);
-          \coordinate (e) at ($(b)+(\slantdegree-180:{\slantlen})$);
+          \coordinate (b) at (0,0);
+          \coordinate (e) at (\slantdegree-180:{\slantlen});
 
           % Uncomment the next three lines to draw end arcs
           % \draw [/s/slant/ends]
           % ([xshift=-\nibwidth/2] b) arc ( 180:0:\nibwidth/2)
           % ([xshift=-\nibwidth/2] e) arc (-180:0:\nibwidth/2);
 
-          % Draw slant guidelines
+          % Draw a slant guideline
           \draw [/s/slant/guide] (b) -- (e);
         }
     }
@@ -132,23 +129,28 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Everything below this line is not intended to be user-configurable.
-
-% Macro for maximum length of slant guidelines; uses \totalheight
-\def\slantlen{(\totalheight-\syoff)/sin(\slantdegree)}
-
-% Compute stamping lengths and separations
+% Compute stamping offsets, lengths, and separations
 \pgfmathsetlengthmacro{\sxoff}{\xoffsetNW*\nibwidth}
+\pgfmathsetlengthmacro{\sxlen}{0}
 \pgfmathsetlengthmacro{\sxsep}{\xsepNW*\nibwidth}
 \pgfmathsetlengthmacro{\syoff}{\yoffsetNW*\nibwidth}
 \pgfmathsetlengthmacro{\sylen}{(\ascenderNW+\descenderNW)*\nibwidth}
 \pgfmathsetlengthmacro{\sysep}{\ysepNW*\nibwidth}
 
-% Compute the number of stamps that can fit in printable area
-\pgfmathsetmacro{\nx}{int((\textwidth+\textheight/tan(\slantdegree))/\sxsep)}
-\pgfmathsetmacro{\ny}{int((\textheight+\sysep-\syoff)/(\sylen+\sysep))}
+% Compute the number of stamps in picture (\nx is an over-approximation because
+% picture dimensions are approximated by canvas dimensions; \ny is accurate)
+\pgfmathsetmacro{\nx}{int((\canvaswidth-\sxoff+\canvasheight/tan(\slantdegree))/\sxsep+1)}
+\pgfmathsetmacro{\ny}{int((\canvasheight-\syoff+\sysep)/(\sylen+\sysep))}
+
+% Compute picture height and width
+\pgfmathsetlengthmacro{\pictureheight}{\syoff+\ny*(\sylen+\sysep)-\sysep}
+\pgfmathsetlengthmacro{\picturewidth}{\canvaswidth}
+
+% Compute maximum length of slant guidelines for x-stamps
+\def\slantlen{\pictureheight/sin(\slantdegree)}
 
 % Set PDF properties
+\providecolor{wmcolor}{cmyk:named}{black!0}
 \extractcolorspec{scolora}{\scolora}
 \extractcolorspec{scolorc}{\scolorc}
 \extractcolorspec{scolorx}{\scolorx}
@@ -167,13 +169,16 @@
   pdftitle=\pdftitle,
   pdfkeywords=
     {%
-      \template,
-      a=\scolora; c=\scolorc,
-      x=\scolorx; b=\scolorb,
-      d=\scolord; s=\scolors,
+      \template;
+      a=\scolora; c=\scolorc;
+      x=\scolorx; b=\scolorb;
+      d=\scolord; s=\scolors
     },
   pdfsubject={https://github.com/maverickwoo/paperpad-templates},
   pdfauthor={Maverick Woo}
 }
 
+% Go!
+\begin{document}
 \input{body}
+\end{document}

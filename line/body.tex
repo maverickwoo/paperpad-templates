@@ -1,50 +1,83 @@
 % !TeX root = ./explain.tex
+%
+\ifshowbb\begin{tikzpicture}[remember picture, overlay, green, fill opacity=0.1]
 
-% This file does not contain any user-adjustable parameter.
+  % Shade text areas
+  \fill     (current page text area.south west)
+  rectangle (current page text area.north east);
+  \fill     (current page marginpar area.south west)
+  rectangle (current page marginpar area.north east);
+  \fill     (current page header area.south west)
+  rectangle (current page header area.north east);
+  \fill     (current page footer area.south west)
+  rectangle (current page footer area.north east);
 
-\begin{document}
+\end{tikzpicture}\fi
+%
+\begin{tikzpicture}[remember picture, overlay]
 
-\begin{tikzpicture}[remember picture,overlay]
-
-  % Add watermark
+  % Add watermark into background
   \def\repourl{https://github.com/maverickwoo/paperpad-templates}
-  \draw [font=\ttfamily\tiny,color=wmcolor]
-  node at ($(current page text area.north)-(0mm,0.5ex)$) {
+  \draw [inner sep=0pt, font=\ttfamily\tiny, color=wmcolor]
+  node [anchor=north] at ($(current page.north) - (0mm,5mm)$) {
     \href{\repourl}{\number\year-\number\month-\number\day}}
-  node at ($(current page text area.south)+(0mm,0.5ex)$) {
+  node [anchor=south] at ($(current page.south) + (0mm,5mm)$) {
     \href{\repourl}{\pdftitle}};
 
-  % Compute x and y margins to center page
-  \pgfmathsetlengthmacro{\totalwidth}{\textwidth}
-  \pgfmathsetlengthmacro{\marginx}{(\paperwidth-\totalwidth)/2}
-  \pgfmathsetlengthmacro{\totalheight}{\syoff+\ny*\sylen+(\ny-1)*\sysep}
-  \pgfmathsetlengthmacro{\marginy}{(\paperheight-\totalheight)/2}
+  % Create nodes "canvas rect" and "picture rect" using "current page text area"
+  \begin{scope}[
+      shift=(current page text area.north west),
+      anchor=north west,
+      line width=0, % node anchor points are on the outside of border lines
+      fill opacity=\ifshowbb 0.1 \else 0 \fi]
 
-  % Compute and shift to new origin
-  \begin{scope}[shift={($(current page.south west)+(\marginx,\marginy)$)}]
+    % Compute picture top-left (either center picture or anchor to canvas top-left)
+    \pgfmathparse{\canvasvcentering && \canvastop==0 && \canvasbottom==0}
+    \ifnum\pgfmathresult>0
+      \pgfmathsetlengthmacro{\picturetop}{(\textheight-\pictureheight)/2}
+    \else
+      \pgfmathsetlengthmacro{\picturetop}{\canvastop}
+    \fi
+    \pgfmathparse{\canvashcentering && \canvasleft==0 && \canvasright==0}
+    \ifnum\pgfmathresult>0
+      \pgfmathsetlengthmacro{\pictureleft}{(\textwidth-\picturewidth)/2}
+    \else
+      \pgfmathsetlengthmacro{\pictureleft}{\canvasleft}
+    \fi
 
-    % Print y-stamps from top to bottom
-    \foreach \iy in {\ny,...,1}
-      {
-        % \depthy is needed for dash phase computations in ystamp
-        \pgfmathsetlengthmacro{\depthy}{(\ny-\iy)*(\sylen+\sysep)}
-        \pgfmathsetlengthmacro{\deltay}{(\iy-  1)*(\sylen+\sysep)}
-        \draw (0,\deltay) pic {ystamp};
-      }
+    \node (canvas rect) [fill=cyan]
+    at (\canvasleft, -\canvastop)
+    [minimum width=\canvaswidth, minimum height=\canvasheight] {};
 
-    % Clip slant guidelines at x margins
-    \clip     (          0,            -\marginy)
-    rectangle (\totalwidth,\totalheight+\marginy);
-
-    % Print x-stamps from left to right
-    \foreach \ix in {1,...,\nx}
-      {
-        \pgfmathsetlengthmacro{\deltax}{(\ix-1)*\sxsep}
-        \draw (\deltax,\totalheight) pic {xstamp};
-      }
+    \node (picture rect) [fill=pink]
+    at (\pictureleft, -\picturetop)
+    [minimum width=\picturewidth, minimum height=\pictureheight] {};
 
   \end{scope}
 
-\end{tikzpicture}
+  % Draw target picture
+  \begin{scope}[shift=(picture rect.south west)]
 
-\end{document}
+    % Print y-stamps from top to bottom along picture west
+    \foreach \iy in {\ny,...,1}
+      {
+        \pgfmathsetlengthmacro{\xcoord}{0}
+        \pgfmathsetlengthmacro{\ycoord}{(\iy-  1)*(\sylen+\sysep)}
+        \pgfmathsetlengthmacro{\ydepth}{(\ny-\iy)*(\sylen+\sysep)}
+        \draw (\xcoord,\ycoord) pic {y-stamp};
+      }
+
+    % Start clipping on picture east and west for x-stamps
+    \clip     (\picturewidth,0 |- current page.north)
+    rectangle (            0,0 |- current page.south);
+
+    % Print x-stamps from left to right along picture north
+    \foreach \ix in {1,...,\nx}
+      {
+        \pgfmathsetlengthmacro{\xcoord}{\sxoff+(\ix-1)*\sxsep}
+        \pgfmathsetlengthmacro{\ycoord}{\pictureheight}
+        \draw (\xcoord,\ycoord) pic {x-stamp};
+      }
+  \end{scope}
+
+\end{tikzpicture}\ignorespaces
