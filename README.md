@@ -3,8 +3,8 @@
 This repository contains LaTeX templates for making DIY paper pads. Currently,
 it contains templates for:
 
-* [Grid sheets](grid)
-* [Ruled sheets](ruled)
+- [Grid sheets](grid)
+- [Ruled sheets](ruled)
 
 These templates use my own default settings. The reason I am open-sourcing them
 is so that you can customize them to your own needs. If you need help, please
@@ -67,8 +67,8 @@ to preserve this page.)
 ## Ruled Sheets
 
 1. Open college-ruled sheet
-   ([a4](https://www.overleaf.com/docs?engine=xelatex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/ruled/preamble.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/ruled/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/ruled/college-ruled.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/ruled/printer-paper-a4.tex&snip_name[]=preamble.tex&snip_name[]=body.tex&snip_name[]=college-ruled.tex&snip_name[]=printer-paper.tex),
-   [letter](https://www.overleaf.com/docs?engine=xelatex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/ruled/preamble.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/ruled/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/ruled/college-ruled.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/ruled/printer-paper.tex))
+   ([a4](https://www.overleaf.com/docs?engine=xelatex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/ruled-fullpage/preamble.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/ruled-fullpage/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/ruled-fullpage/college-ruled.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/ruled-fullpage/printer-paper-a4.tex&snip_name[]=preamble.tex&snip_name[]=body.tex&snip_name[]=college-ruled.tex&snip_name[]=printer-paper.tex),
+   [letter](https://www.overleaf.com/docs?engine=xelatex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/ruled-fullpage/preamble.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/ruled-fullpage/body.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/ruled-fullpage/college-ruled.tex&snip_uri[]=https://raw.githubusercontent.com/maverickwoo/paperpad-templates/alpha/ruled-fullpage/printer-paper.tex))
    on Overleaf
 
 2. Open ruled sheet with slant guidelines
