@@ -1,0 +1,23 @@
+% !TeX root = ./explain.tex
+
+% Font and symbols
+\usepackage[T1]{fontenc}
+\usepackage{newpxtext,newpxmath}
+\usepackage{textcomp}
+
+% Tikz
+\usepackage[svgnames]{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{tikzpagenodes}
+
+% Put hyperref Last
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+
+% Adjust printer and paper parameters in the following file
+\input{printer-paper}
+
+% Compute \canvasheight and \canvaswidth
+\pgfmathsetlengthmacro{\canvasheight}{\textheight-\canvastop-\canvasbottom}
+\pgfmathsetlengthmacro{\canvaswidth}{\textwidth-\canvasleft-\canvasright}

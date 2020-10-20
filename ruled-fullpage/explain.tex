@@ -1,0 +1,72 @@
+% !TeX root = ./explain.tex
+
+% Overleaf detects the main file by \documentclass
+\documentclass[UTF8,11pt,twoside]{ctexart}
+
+% The invariant part of the preamble
+\input{preamble}
+\showbbtrue
+
+% Declare template
+\def\template{Explanation for Ruled-Paper Template}
+
+% Declare a tikz pic for stamping top to bottom
+\tikzset{
+  pics/y-stamp/.style=
+    {
+      code=
+        {
+          \draw (0,0) circle (1mm)
+          node at (0,0) [pin=above right:origin of first y-stamp] {};
+        }
+    }
+}
+
+% Declare a tikz pic for stamping left to right
+\tikzset{
+  pics/x-stamp/.style=
+    {
+      code=
+        {
+          \draw (0,0) circle (1mm)
+          node at (0,0) [pin=below right:origin of first x-stamp] {};
+        }
+    }
+}
+
+% Compute stamping offsets, lengths, and separations
+\pgfmathsetlengthmacro{\sxoff}{1in}
+\pgfmathsetlengthmacro{\sxlen}{0}
+\pgfmathsetlengthmacro{\sxsep}{0}
+\pgfmathsetlengthmacro{\syoff}{1in}
+\pgfmathsetlengthmacro{\sylen}{0}
+\pgfmathsetlengthmacro{\sysep}{0}
+
+% Compute the number of stamps in picture
+\pgfmathsetmacro{\sxnum}{1}
+\pgfmathsetmacro{\synum}{1}
+
+% Compute picture height and width
+\pgfmathsetlengthmacro{\pictureheight}{\canvasheight}
+\pgfmathsetlengthmacro{\picturewidth}{\canvaswidth}
+
+% Set PDF properties
+\providecolor{wmcolor}{cmyk:named}{black!0}
+\def\pdftitle{\template}
+\hypersetup{
+  pdftitle=\pdftitle,
+  pdfsubject={https://github.com/maverickwoo/paperpad-templates},
+  pdfauthor={Maverick Woo}
+}
+
+% Go!
+\begin{document}
+
+\section{Introduction}
+
+To understand this template, you need to understand two groups of concepts: (i)
+geometry and (ii) stamping.
+
+\input{body}
+
+\end{document}

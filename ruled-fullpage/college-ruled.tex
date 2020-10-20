@@ -8,18 +8,16 @@
 
 % Declare template
 \def\template{College-ruled sheet}
-\pgfmathsetmacro{\canvasvcentering}{!true}
-\pgfmathsetmacro{\canvashcentering}{true}
 
 % Declare offsets and separations of x- and y-stamps
-\def\xoffset{1in+5in/16}
+\def\xoffset{1in+2in/16} % 5/16 is Atoma
 \def\xsep{\textwidth}
-\def\yoffset{1in}
+\def\yoffset{1in-1in/16} % 1/16 is printer paper feed inaccuracy
 \def\ysep{9in/32}
 
 % Declare guideline colors
 \providecolor{scolorh}{cmyk:named}{cyan!66!yellow!40}
-\providecolor{scolorv}{cmyk:named}{magenta!66!yellow!50}
+\providecolor{scolorv}{cmyk:named}{magenta!66!yellow!60}
 
 % Declare a tikz pic for stamping top to bottom
 \tikzset{
@@ -35,6 +33,9 @@
           \draw [/s/h]
           (0,    0) -- +(\picturewidth,0)
           (0,\ysep) -- +(\picturewidth,0);
+
+          \draw (0,0) circle (5mm);
+          \node at (5cm,0) {ch: \canvasheight, ph: \pictureheight};
         }
     }
 }
@@ -51,7 +52,10 @@
       code=
         {
           \draw [/s/v]
-          (0,0 |- canvas rect.north) -- (0,0 |- canvas rect.south);
+          (0,0 |- canvas rect.north)
+          -- (0,0 |- canvas rect.south);
+
+          \draw (0,0) circle (5mm);
         }
     }
 }
@@ -65,11 +69,12 @@
 \pgfmathsetlengthmacro{\sysep}{0}
 
 % Compute the number of stamps in picture
-\pgfmathsetmacro{\nx}{int((\canvaswidth-\sxoff)/\sxsep+1)}
-\pgfmathsetmacro{\ny}{int((\canvasheight-\syoff+\sysep)/(\sylen+\sysep))}
+% todo: the reason why this does not generalize to slanted is because we need to extend the width
+\pgfmathsetmacro{\sxnum}{int((\canvaswidth-\sxoff+\sxsep)/(\sxlen+\sxsep))}
+\pgfmathsetmacro{\synum}{int((\canvasheight-\syoff+\sysep)/(\sylen+\sysep))}
 
 % Compute picture height and width
-\pgfmathsetlengthmacro{\pictureheight}{\syoff+\ny*(\sylen+\sysep)-\sysep}
+\pgfmathsetlengthmacro{\pictureheight}{\syoff+\synum*(\sylen+\sysep)-\sysep}
 \pgfmathsetlengthmacro{\picturewidth}{\canvaswidth}
 
 % Set PDF properties
@@ -77,7 +82,7 @@
 \extractcolorspec{scolorh}{\scolorh}
 \extractcolorspec{scolorv}{\scolorv}
 \def\pdftitle{%
-  \ny-line \template{} (\ysep)
+  \synum-line \template{} (\ysep)
 }
 \hypersetup{
   pdftitle=\pdftitle,

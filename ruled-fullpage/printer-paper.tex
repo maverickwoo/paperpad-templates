@@ -1,0 +1,35 @@
+% !TeX root = ./explain.tex
+
+% Define paper geometry and text areas; for more settings, see
+% http://mirrors.ctan.org/macros/latex/contrib/geometry/geometry.pdf
+\usepackage[
+  % Paper size (a4paper, b5paper, letterpaper, etc.)
+  letterpaper,
+  % Orientation (portrait or landscape)
+  portrait,
+  % Text area margin
+  top=0mm,
+  bottom=0mm,
+  left=0mm,
+  right=0mm
+]{geometry}
+
+% Declare canvas margins within text area---if the canvas margins in one
+% dimension are both set to 0 (meaning the canvas and the text area have the
+% same length in that dimension), then body.tex will automatically center the
+% picture within the canvas (and thus the text area) in that dimension unless
+% the corresponding centering option is disabled in template
+\pgfmathsetlengthmacro{\canvastop}{0mm}
+\pgfmathsetlengthmacro{\canvasbottom}{5mm} % to ensure the last row is printed in its entirety
+\pgfmathsetmacro{\canvasvcentering}{!true}
+\pgfmathsetlengthmacro{\canvasleft}{0mm}
+\pgfmathsetlengthmacro{\canvasright}{0mm}
+\pgfmathsetmacro{\canvashcentering}{!true}
+
+% Normally we want empty header and footer
+\usepackage{fancyhdr}
+\pagestyle{empty}
+
+% Enable this option to show bounding boxes for debugging
+\newif\ifshowbb
+% \showbbtrue
